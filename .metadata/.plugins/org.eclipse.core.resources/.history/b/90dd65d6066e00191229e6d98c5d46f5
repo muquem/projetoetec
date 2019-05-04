@@ -1,0 +1,23 @@
+package br.com.projetoetec.business;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+public class CadastroSB extends BaseSB{
+	
+	private CadastroDAO CadastroDAO;
+	
+	@Override
+	protected void postConstructImpl() {
+		CadastroDAO  = getDAO(CadastroDAO .class);
+
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void save(Cadastro cadastro) {
+		CadastroDAO.save(cadastro);
+	}
+
+}
